@@ -1,11 +1,16 @@
-
+const db = require('../../data/dbConfig')
 
 async function findAll () {
-    return 'findAll resource wired'
+    return db('resources');
+}
+
+function findById (id) {
+    return db('resources').where('resource_id', id).first();
 }
 
 async function insert (resource) {
-    return 'insert resource wired'
+    const [id] = await db('resources').insert(resource);
+    return findById(id)
 }
 
 module.exports = { findAll, insert }
