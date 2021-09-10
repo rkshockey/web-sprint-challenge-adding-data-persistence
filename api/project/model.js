@@ -1,11 +1,16 @@
 const db = require('../../data/dbConfig')
 
 async function findAll () {
-    return db('projects');
+    const rows = await db('projects');
+    return rows.map(item => {return {
+        ...item, 
+        project_completed: item.project_completed ? true : false
+    }});
 }
 
 async function findById (id) {
-    return db('projects').where('id', id);
+    const row = await db('projects').where('project_id', id).first();
+    return {...row, project_completed: row.project_completed ? true : false}
 }
 
 async function insert (project) {
