@@ -1,1 +1,7 @@
-// build your `/api/projects` router here
+const router = require('express').Router()
+
+router.get('/', (req, res) => {
+    res.json({message: 'boop'})
+})
+
+module.exports = router
